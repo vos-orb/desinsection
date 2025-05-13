@@ -1,0 +1,331 @@
+/* LAYOUT START */
+@use 'scss/fonts';
+@use 'scss/variables';
+@use 'scss/mixins';
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/*standatrtize inline flex layout*/
+.flex-row {
+	display: flex;
+	display: table-row \0/ IE9;
+	width: 100% \0/ IE9;
+}
+.flex-row > .flex-row-column {
+	flex: 1;
+	display: inline-block \0/ IE9;
+	vertical-align: top \0/ IE9;
+}
+.flex-row > .flex-row-column.rest {
+	flex: -1 1 auto;
+}
+.flex-row > .flex-row-column.by-content {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: auto;
+}
+.flex-row.wrapping {
+	flex-wrap: wrap;
+}
+.flex-row-2 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	display: table-row \0/ IE9;
+	width: 100% \0/ IE9;
+}
+.flex-row-2 > .flex-row-column-2 {
+	display: table-cell \0/ IE9;
+}
+/*standatrtize vertical flex layout*/
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	flex-flow: column nowrap;
+	height: 100%;
+	display: inline-block \0/ IE9;
+	vertical-align: top;
+}
+.flex-column > .flex-column-cell.rest {
+	flex: 2;
+}
+.flex-column > .flex-column-cell.by-content {
+
+}
+* {
+	font: variables.$font-base;
+}
+//HEADER
+.header {
+	font: variables.$font-base;
+	position: absolute;
+	@include mixins.stickme;
+	z-index: 100;
+	top: 0;
+	height: 0px;
+	background: transparent;
+	
+	.navbar {
+		background: transparent;
+		max-width: 100%;
+		font-size: variables.$font-size-base;
+		
+		.center-block {
+			text-align: center;
+			padding: 0 40px 0 8px;
+			container-type: inline-size;
+			container-name: center-block;
+		}
+	}
+	.nav-menu-opener {
+		height: variables.$header-height;
+		display: none;
+		width: variables.$header-height;
+		.decor {
+			width: 40px;
+			height: 20%;
+			background: variables.$link-color;
+			margin-top: 40%;
+			position: relative;
+			border-radius: 10%;
+			&:before {
+				content: ' ';
+				height: 100%;
+				background: variables.$link-color;
+				display: block;
+				position: absolute;
+				width: 100%;
+				margin-top: -40%;
+				border-radius: 10%;
+			}
+			&:after {
+				content: ' ';
+				height: 100%;
+				background: variables.$link-color;
+				display: block;
+				position: absolute;
+				width: 100%;
+				margin-top: 40%;
+				border-radius: 10%;
+			}
+		}
+	}
+	.navbar-nav {
+		width: auto;
+		//min-width: 200px;
+		list-style: none;
+		padding: 0;
+		margin: 0 auto;
+		display: inline-block;
+		vertical-align: top;
+		
+		//white-space: nowrap;
+		width: 100%;
+		.nav-item {
+			display: inline-block;
+			width: auto;
+			padding-right: 8px;
+			height: variables.$header-height;
+			line-height: variables.$header-height;
+			position: relative;
+			
+			&.nav-dropdown {
+				&>.nav-link {
+					&:after {
+						content: '▼'
+					}
+				}
+			}
+			&:before {
+				content: ' ';
+				-webkit-box-shadow: 4px 4px 52px 56px rgba(39, 147, 186, 0.9);
+				-moz-box-shadow: 4px 4px 52px 56px rgba(39, 147, 186, 0.9);
+				box-shadow: 4px 4px 52px 56px rgba(39, 147, 186, 0.9);
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: block;
+				width: 100%;
+				height: 0px;
+				background: transparent;
+				z-index: -1;
+			}
+			&:after {
+				content: '|';
+				display: inline-block;
+				padding-left: 8px;
+				color: variables.$link-color;
+				position: relative;
+			}
+			&:last-child {
+				&:after{
+					display: none;
+				}
+			}
+			.nav-link {
+				height: variables.$header-menu-item-height;
+				white-space: nowrap;
+				text-decoration: none;
+				color: variables.$link-color;
+				position: relative;
+				.icon-sub-menu {
+					display: inline-block;
+					height: 16px;
+				}
+			}
+			.nav-dropdown-list-container {
+					display: none;
+					position: absolute;
+					right: 0;
+					margin-right: -100%;
+					z-index: 100;
+					top: 35px;
+					&:before {
+						content: ' ';
+						display: block;
+						width: 100%;
+						height: 30px;
+						top: -29px;
+						background: transparent;
+					}
+				}
+			.nav-dropdown-list {
+				background: transparent;
+				list-style: none;
+				padding: 0;
+				.nav-item {
+					display: block;
+					height: variables.$header-menu-item-height;
+					line-height: variables.$header-menu-item-height;
+					vertical-align: top;
+					text-align: center;
+					cursor: pointer;
+					padding: 0 8px;
+					&:before {
+						-webkit-box-shadow: 4px 4px 30px 30px rgba(39, 147, 186, 0.9);
+						-moz-box-shadow: 4px 4px 30px 30px rgba(39, 147, 186, 0.9);
+						box-shadow: 4px 4px 30px 30px rgba(39, 147, 186, 0.9);
+					}
+					&:after {
+						display: none;
+					}
+				}
+			}
+			&:hover {
+				position: relative;
+				z-index: 1001;
+				.nav-dropdown-list-container {
+					display: inline-block;
+				}
+				&>.nav-link {
+					text-decoration: underline;
+
+				}
+			}
+
+		}
+		
+	}
+	.contact-box {
+		color: #ffffff;
+		padding: 0 8px;
+		.city-phone {
+			text-decoration: none;
+			color: #ffffff;
+			display: block;
+			font-size: 24px;
+		}
+		.cities-selector-trigger {
+			background: transparent;
+			border: none;
+			text-align: right;
+			display: block;
+			padding: 0;
+			width: 100%;
+		}
+	}
+}
+@container center-block (100px <= width <=800px) {
+	.header .navbar .navbar-nav {
+		margin-top: 10px;
+	}
+	.header .navbar-nav .nav-item {
+		height: 25px;
+		line-height: 25px;
+	}
+}
+/*@media (max-width:1000px) {
+			.header .navbar-nav .nav-item {
+				line-height: 20px;
+				height: 20px;
+			}
+		}*/
+//PROMO
+.promo {
+	background: url('../img/gb_promo003_with_logo.svg') 0 0 no-repeat transparent;
+	background-size: cover;
+	height: 50vw;
+	.pattern-text {
+		font-size: 5px;
+		fill: rgba(39, 147, 186, 0.9);
+		//-moz-transform: rotate(45deg);
+		//-webkit-transform: rotate(45deg);
+		//transform:rotate(45deg);
+	}
+	.promo-text-container {
+		border: 4px solid rgba(39, 147, 186, 0.9);
+		background: rgba(39, 147, 186, 0.8);
+		display: block;
+		margin: 0 auto;
+		width: 600px;
+		top: 200px;
+		position: relative;
+		&>p {
+			margin: 20px 0 40px 0;
+			width: 100%;
+			display: block;
+			font-size: 30px;
+			text-align: center;
+			color: #ffffff;
+			position: relative;
+		}
+	}
+}
+
+.service-tiles {
+	.tile {
+		border: 4px solid rgba(39, 147, 186, 0.9);
+		background: rgba(39, 147, 186, 0.8);
+		display: inline-block;
+		vertical-align: top;
+		box-sizing: border-box;
+		width: 20%;
+		margin-left: 4%;
+		position: relative;
+		&:nth-child(2n) {
+			top: -200px;
+			
+		}
+		.tile-head {
+			&>svg {
+				width: 100%;
+			}
+			&>h3 {
+				font-size: 24px;
+				font-weight: bold;
+				text-align: center;
+			}
+		}
+		.tile-body {
+			padding: 12px;
+			font-size: 18px;
+			line-height: 24px;
+		}
+	}
+}

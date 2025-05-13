@@ -1,0 +1,42 @@
+@import "https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css";
+
+.map-container {
+  position: relative;
+  max-width: var(--safeframe-width);
+  margin: 7.4rem auto;
+  width: 100%;
+}
+
+.map-container .map-title {
+  margin: 0px 0px 1em;
+  word-break: break-word;
+}
+
+.map-container .map {
+  height: 43.5rem;
+  background-color: rgb(223, 223, 223);
+  /* background-image: url("/modules/BranchesMap/public/front/img/map-preview.png"); */
+  background-size: cover;
+  background-position: center center;
+}
+
+.mapboxgl-ctrl-attrib-button {
+  font-size: 0;
+}
+
+@media (max-width: 1590px) {
+  .map-container .map-title {
+    padding-left: var(--safeframe-padding);
+    padding-right: var(--safeframe-padding);
+  }
+}
+
+@media (max-width: 780px) {
+  .map-container {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
+  .map-container .map {
+    height: 50vh;
+  }
+}
